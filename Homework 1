@@ -1,0 +1,60 @@
+/* Random Number Guessing Game:
+   This program generates a random whole number for the user
+   to try to guess. */
+
+using System;
+
+namespace Project_1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int user_guess;
+            int count = 0;
+
+            int random_num = random.Next(1, 51);
+            Console.WriteLine($"Random Number: {random_num}");
+
+            do
+            {
+                count += 1;
+                user_guess = get_user_guess();
+                if (user_guess < random_num)
+                {
+                    Console.WriteLine("Your guess was too low.");
+                }
+                if (user_guess > random_num)
+                {
+                    Console.WriteLine("Your guess was too high.");
+                }
+                if (user_guess == random_num)
+                {
+                    Console.WriteLine($"\n\nYou guessed it!!! The random number is: {random_num}");
+                    Console.WriteLine($"Number of guesses: {count}");
+                }
+
+            } while (user_guess != random_num);
+        }
+
+        static int get_user_guess()
+        {
+            int guess;
+
+            do
+            {
+                Console.WriteLine("\nEnter a number between 1 and 50 (inclusive):");
+                guess = int.Parse(Console.ReadLine());
+                if (guess < 1 || guess > 50)
+                    Console.WriteLine("Oops... You need to pick a number between 1 " +
+                                      "and 50 (inclusive).");
+
+            } while (guess < 1 || guess > 50);
+
+            return guess;
+        }
+    }
+}
+
+
